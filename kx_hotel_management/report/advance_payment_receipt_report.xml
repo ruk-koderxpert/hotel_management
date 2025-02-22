@@ -1,0 +1,116 @@
+<odoo>
+    <template id="report_advance_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Advance Payment Receipt</h2>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Booking ID:</strong> <t t-out="docs.name"/>
+                        </div>
+                        <div class="col-6">
+                            <strong>Order Date:</strong> <t t-out="docs.date_order"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Customer Name:</strong> <t t-out="docs.partner_id.name"/>
+                        </div>
+                        <div class="col-6">
+                            <strong>Mobile:</strong> <t t-out="docs.partner_id.mobile"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                        </div>
+                        <div class="col-6">
+                            <strong>Advanced Payment %:</strong> <t t-out="docs.advanced_payment"/>
+                        </div>
+                    </div>
+                    <br/>
+                    
+                    <h2 class="text-center">Booking Details</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sl No.</th>
+                                <th>Room</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Duration</th>
+                                <th>Unit of Measure</th>
+                                <th>No of Person</th>
+                                <th>Extra Person</th>
+                                <th>Rent</th>
+                                <th>Taxes</th>
+                                <th>Sub Total</th>
+                                <th>Discount</th>
+                                <th>Advance Payment</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <t t-set="i" t-value="0"/>
+                        <t t-foreach="docs.room_line_ids" t-as="line">
+                            <t t-set="i" t-value="i + 1"/>
+                            <tr>
+                                <td>
+                                    <t t-out="i"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.room_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.checkin_date"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.checkout_date"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.uom_qty"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.uom_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.no_of_person"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.extra_person"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.price_unit"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.tax_ids.name"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.price_subtotal"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.discount"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.price_advance_payment"/>
+                                </td>
+                                <td>
+                                    <t t-out="line.price_total"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_advance_payment" model="ir.actions.report">
+        <field name="name">Advance Payment Receipt</field>
+        <field name="model">room.booking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">kx_hotel_management.report_advance_payment_receipt</field>
+        <field name="report_file">kx_hotel_management.report_advance_payment_receipt</field>
+        <field name="binding_model_id" ref="model_room_booking"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

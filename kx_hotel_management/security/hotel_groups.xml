@@ -1,0 +1,18 @@
+<odoo>
+    <record id="module_category_hotel_management" model="ir.module.category">
+        <field name="name">Hotel Management</field>
+        <field name="description">Hotel Access Groups</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="hotel_group_reception" model="res.groups">
+        <field name="name">Receptionist</field>
+        <field name="category_id" ref="kx_hotel_management.module_category_hotel_management"/>
+    </record>
+
+    <record id="hotel_group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="kx_hotel_management.module_category_hotel_management"/>
+        <field name="implied_ids" eval="[(4, ref('hotel_group_reception'))]"/>
+    </record>
+</odoo>
