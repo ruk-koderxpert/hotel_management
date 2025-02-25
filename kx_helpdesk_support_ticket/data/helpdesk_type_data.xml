@@ -1,0 +1,16 @@
+<odoo>
+    <data noupdate="1">
+        <record id="ticket_type_1" model="helpdesk.type">
+            <field name="name">Question</field>
+        </record>
+        <record id="ticket_type_2" model="helpdesk.type">
+            <field name="name">Issue</field>
+        </record>
+        <record id="ticket_type_3" model="helpdesk.type">
+            <field name="name">Repair</field>
+        </record>
+        <record id="ticket_type_4" model="helpdesk.type">
+            <field name="name">Maintenance</field>
+        </record>
+    </data>
+</odoo>

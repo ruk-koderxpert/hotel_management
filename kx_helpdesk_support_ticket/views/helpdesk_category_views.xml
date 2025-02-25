@@ -1,0 +1,26 @@
+<odoo>
+    <record id="helpdesk_category_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.category.view.tree</field>
+        <field name="model">helpdesk.category</field>
+        <field name="arch" type="xml">
+            <tree string="Categories" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">helpdesk.category</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_helpdesk_categories"
+        name="Categories"
+        action="action_helpdesk_category"
+        groups="kx_helpdesk_support_ticket.group_show_category"
+        parent="kx_helpdesk_support_ticket.menu_helpdesk_configuration"
+        sequence="10"/>
+
+</odoo>

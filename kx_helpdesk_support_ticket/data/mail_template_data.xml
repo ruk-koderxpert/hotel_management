@@ -1,0 +1,214 @@
+<odoo>
+    <record id="ticket_created" model="mail.template">
+        <field name="name">Create Ticket</field>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_to">{{object.customer_id.email}}</field>
+        <field name="subject">Ticket Created</field>
+        <field name="body_html" type="html">
+            <p>
+                Dear
+                <t t-out="object.customer_id.name"/>
+                <br/>
+                Your Ticket
+                <t t-out="object.name"/>
+                is Created and Assigned. Kindly Wait while we're resolving your Query
+                <br/>
+                <br/>
+                Thanks.
+            </p>
+        </field>
+    </record>
+    <record id="helpdesk_rating" model="mail.template">
+        <field name="name">Close Ticket And Feedback</field>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_to">{{object.customer_id.email}}</field>
+        <field name="subject">Ticket Closed</field>
+        <field name="body_html" type="html">
+            <p>
+                Dear
+                <t t-out="object.customer_id.name"/>
+                Your Ticket
+                <t t-out="object.name"/>
+                Is Closed
+                <br/>
+                <button class="btn btn-info" role="button"
+                        style="border:1px solid black;background-color:purple;padding-x:20px;padding-y:15px;border-radius:10px; width:120px;">
+                    <a t-attf-href="/rating/{{object.id}}" style="text-decoration:none;color:white;font-weight:bold;font-size:18px;">
+                        Rate Now
+                    </a>
+                </button>
+                <br/>
+                <br/>
+                Thanks.
+            </p>
+        </field>
+    </record>
+    <record id="ticket_reopened" model="mail.template">
+        <field name="name">Reopened Ticket</field>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_to">{{object.customer_id.email}}</field>
+        <field name="subject">Ticket Reopened</field>
+        <field name="body_html" type="html">
+            <p>
+                Dear
+                <t t-out="object.customer_id.name"/>
+                <br/>
+                Your Ticket
+                <t t-out="object.name"/>
+                is Reopened
+                <br/>
+                <br/>
+                Thanks.
+            </p>
+        </field>
+    </record>
+    <record id="ticket_approved" model="mail.template">
+        <field name="name">Approve Ticket</field>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_to">{{object.customer_id.email}}</field>
+        <field name="subject">Ticket Solved</field>
+        <field name="body_html" type="html">
+            <p>
+                Dear
+                <t t-out="object.customer_id.name"/>
+                <br/>
+                i think your Problem is Solved.
+                Your Ticket
+                <t t-out="object.name"/>
+                is Done
+                <br/>
+                <br/>
+                Thanks.
+            </p>
+        </field>
+    </record>
+    <record id="ticket_canceled" model="mail.template">
+        <field name="name">Cancel Ticket</field>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_to">{{object.customer_id.email}}</field>
+        <field name="subject">Ticket Canceled</field>
+        <field name="body_html" type="html">
+            <p>
+                Dear
+                <t t-out="object.customer_id.name"/>
+                <br/>
+                Your Ticket
+                <t t-out="object.name"/>
+                is Canceled Due to Some Reasons
+                <br/>
+                <br/>
+                Thanks.
+            </p>
+        </field>
+    </record>
+    <record id="odoo_website_helpdesk_assign" model="mail.template">
+        <field name="name">Ticket Assign</field>
+        <field name="email_from"/>
+        <field name="email_to"/>
+        <field name="subject"/>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear,
+                    <t t-out="object.team_head_id.name"/>
+                </p>
+                <p>Your team has been given the ticket [<t t-out="object.name"/>] kindly complete your work
+                    carefully.
+                </p>
+                <br/>
+                <h2>Details</h2>
+                <p>Subject :
+                    <t t-out="object.subject"/>
+                </p>
+                <p>Customer :
+                    <t t-out="object.customer_id.name"/>
+                </p>
+                <p>Description :
+                    <t t-out="object.description"/>
+                </p>
+                <br/>
+                <p>Best regards</p>
+            </div>
+        </field>
+    </record>
+    <record id="odoo_website_helpdesk_assign_user" model="mail.template">
+        <field name="name">Ticket Assign to User</field>
+        <field name="email_from"/>
+        <field name="email_to"/>
+        <field name="subject"/>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear,
+                    <t t-out="object.assigned_user_id.name"/>
+                </p>
+                <p>Ticket [<t t-out="object.name"/>] Assign to you , kindly complete your work carefully.
+                </p>
+                <br/>
+                <h2>Details</h2>
+                <p>Subject :
+                    <t t-out="object.subject"/>
+                </p>
+                <p>Customer :
+                    <t t-out="object.customer_id.name"/>
+                </p>
+                <p>Description :
+                    <t t-out="object.description"/>
+                </p>
+                <br/>
+                <p>Best regards</p>
+            </div>
+        </field>
+    </record>
+    <record id="odoo_website_helpdesk_to_customer" model="mail.template">
+        <field name="name">Mail To Customer Assign to User</field>
+        <field name="email_from"/>
+        <field name="email_to"/>
+        <field name="subject"/>
+        <field name="model_id" ref="kx_helpdesk_support_ticket.model_ticket_helpdesk"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear,
+                    <t t-out="object.customer_id.name"/>
+                </p>
+                <p>Ticket [<t t-out="object.name"/>] successfully assigned to "<t t-out="object.assigned_user_id.name"/>".
+                </p>
+                <br/>
+                <p>Best regards</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="ticket_done_email_template" model="mail.template">
+        <field name="name">Ticket Done Notification</field>
+        <field name="model_id" ref="model_ticket_helpdesk"/>
+        <field name="subject">Ticket {{ object.name }} is Complete</field>
+        <field name="email_from">${user.email}</field>
+        <field name="email_to">${object.customer_id.email}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear <t t-out="object.customer_id.name"/>,
+                    <br/><br/>
+                    Your ticket <strong><t t-out="object.name"/></strong> has been marked as done.
+                    <br/><br/>
+                    You can review the ticket by clicking the link below:
+                    <br/><br/>
+                    <a t-attf-href="/my/tickets" style="background-color: #875A7B; padding: 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        View Ticket
+                    </a>
+                    <br/><br/>
+                    If you have any questions, please don't hesitate to contact us.
+                    <br/><br/>
+                    Best regards,<br/>
+                    <t t-out="user.company_id.name"/>
+                </p>
+            </div>
+        </field>
+    </record>
+</odoo>
